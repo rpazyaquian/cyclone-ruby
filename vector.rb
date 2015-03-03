@@ -1,6 +1,11 @@
 class Vector
 	attr_accessor :x, :y, :z
 
+	# for operator overloading
+	def coerce(other)
+		return self, other
+	end
+
 	def initialize(x = nil, y = nil, z = nil)
 		@x = x || 0
 		@y = y || 0
@@ -37,13 +42,20 @@ class Vector
 		self.class.new(new_x, new_y, new_z)
 	end
 
-
 	def multiply_by_scalar!(scalar)
 		@x = @x * scalar
 		@y = @y * scalar
 		@z = @z * scalar
 		self
 	end
+
+	# potential operator overloading approach
+
+	# def *(other)
+	# 	if other.is_a?(Numeric)
+	# 		return self.class.new(@x*other, @y*other, @z*other)
+	# 	end
+	# end
 
 	def add_vector(vector)
 		new_x += vector.x
@@ -58,7 +70,15 @@ class Vector
 		@z += vector.z
 	end
 
+	def subtract_vector(vector)
+	end
+
+	def subtract_vector(vector)
+	end
+
 end
+
+
 
 # vector = Vector.new(1, 1, 1)
 
