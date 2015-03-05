@@ -1,4 +1,4 @@
-class Vector
+class Vector3D
 	attr_accessor :x, :y, :z
 
 	# for operator overloading
@@ -16,6 +16,7 @@ class Vector
 		@x = 0 - @x
 		@y = 0 - @y
 		@z = 0 - @z
+		self
 	end
 
 	def square_magnitude
@@ -26,12 +27,12 @@ class Vector
 		sqrt(square_magnitude)
 	end
 
-	def normalize
+	def normalize!
 		# "turn non-zero vector into vector of unit length"
 		l = magnitude
 
 		if l > 0
-			1 / l
+			multiply_by_scalar(1 / l)
 		end
 	end
 
@@ -68,12 +69,21 @@ class Vector
 		@x += vector.x
 		@y += vector.y
 		@z += vector.z
+		self
 	end
 
 	def subtract_vector(vector)
+		new_x -= vector.x
+		new_y -= vector.y
+		new_z -= vector.z
+		self.class.new(new_x, new_y, new_z)
 	end
 
-	def subtract_vector(vector)
+	def subtract_vector!(vector)
+		@x -= vector.x
+		@y -= vector.y
+		@z -= vector.z
+		self
 	end
 
 end
